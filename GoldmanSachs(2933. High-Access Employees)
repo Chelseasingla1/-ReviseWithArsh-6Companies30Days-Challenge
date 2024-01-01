@@ -1,0 +1,11 @@
+class Solution:
+    def findHighAccessEmployees(self, access_times: List[List[str]]) -> List[str]:
+        l = defaultdict(list)
+        for name, time in access_times:
+            l[name].append(int(time[:2]) * 60 + int(time[2:]))
+        ans = []
+        for name, sorted_time in l.items():
+            sorted_time.sort()
+            if any(sorted_time[i] - sorted_time[i-2] < 60 for i in range(2, len(sorted_time))):
+                ans.append(name)
+        return ans
