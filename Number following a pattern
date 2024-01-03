@@ -1,0 +1,20 @@
+class Solution:
+    def printMinNumberForPattern(self, S):
+        ans = ""
+        for i in range(1, len(S) + 2):
+            ans += str(i)
+
+        while True:
+            j, k, f = 1, 0, True
+            while j < len(ans):
+                if S[k] == 'D' and ans[j] > ans[j - 1]:
+                    ans = ans[:j - 1] + ans[j] + ans[j - 1] + ans[j + 1:]
+                    f = False
+                elif S[k] == 'I' and ans[j] < ans[j - 1]:
+                    ans = ans[:j - 1] + ans[j] + ans[j - 1] + ans[j + 1:]
+                    f = False
+                j += 1
+                k += 1
+
+            if f:
+                break
