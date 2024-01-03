@@ -1,0 +1,19 @@
+class Solution:
+    def findTwoElement(self, arr, n):
+        result = []
+
+        for i in range(n):
+            # Check if the current element is already marked
+            if arr[abs(arr[i]) - 1] > 0:
+                arr[abs(arr[i]) - 1] = -arr[abs(arr[i]) - 1]
+            else:
+                # If the element is already marked, it's the repeating number
+                result.append(abs(arr[i]))
+
+        # Find the missing number
+        for i in range(n):
+            if arr[i] > 0:
+                result.append(i + 1)
+                break
+
+        return result
