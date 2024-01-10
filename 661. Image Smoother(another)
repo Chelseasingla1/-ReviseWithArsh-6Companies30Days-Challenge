@@ -1,0 +1,42 @@
+class Solution {
+public:
+     vector<vector<int>> directions
+     {
+         {-1,-1}, {-1,0}, {-1,1},
+         {0,-1}, {0,0}, {0,1},
+         {1,-1}, {1,0}, {1,1}
+     };
+
+
+    vector<vector<int>> imageSmoother(vector<vector<int>>& img) {
+        int m = img.size();
+        int n = img[0].size();
+
+
+        vector<vector<int>> result(m, vector<int>(n,0));
+
+        for(int i =0; i<m; i++){
+            for(int j =0; j<n; j++)
+            {
+                int sum_s =0;
+                int count_s = 0;
+
+                for(auto &it : directions){
+                    int i1 = i + it[0];
+                    int j1 = j + it[1];
+
+                    if( i1 >= 0 && i1 < m && j1 >=0 && j1 < n){
+                        sum_s += img[i1][j1];
+                        count_s++;
+                    }
+                }
+
+                result[i][j] = sum_s/count_s;
+
+
+            }
+        }
+
+        return result;
+    }
+};
